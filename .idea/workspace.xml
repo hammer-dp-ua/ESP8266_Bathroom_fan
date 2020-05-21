@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Bathroom_fan" targetName="__idf_tcpip_adapter" />
+      <config projectName="Bathroom_fan" targetName="___idf_mdns" />
+      <config projectName="Bathroom_fan" targetName="___idf_protocomm" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp_ringbuf" />
+      <config projectName="Bathroom_fan" targetName="mbedtls" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp_https_ota" />
+      <config projectName="Bathroom_fan" targetName="__ldgen_output_esp8266.project.ld" />
+      <config projectName="Bathroom_fan" targetName="__idf_openssl" />
+      <config projectName="Bathroom_fan" targetName="lib" />
+      <config projectName="Bathroom_fan" targetName="__idf_nvs_flash" />
+      <config projectName="Bathroom_fan" targetName="___idf_protobuf-c" />
+      <config projectName="Bathroom_fan" targetName="___idf_jsmn" />
+      <config projectName="Bathroom_fan" targetName="__idf_log" />
+      <config projectName="Bathroom_fan" targetName="__idf_util" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp_http_server" />
+      <config projectName="Bathroom_fan" targetName="read_otadata" />
+      <config projectName="Bathroom_fan" targetName="__idf_protobuf-c" />
+      <config projectName="Bathroom_fan" targetName="esp8266_linker_script" />
+      <config projectName="Bathroom_fan" targetName="apidoc" />
+      <config projectName="Bathroom_fan" targetName="__idf_json" />
+      <config projectName="Bathroom_fan" targetName="___idf_http_parser" />
+      <config projectName="Bathroom_fan" targetName="___idf_mbedtls" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp_http_server" />
+      <config projectName="Bathroom_fan" targetName="___idf_libsodium" />
+      <config projectName="Bathroom_fan" targetName="___idf_log" />
+      <config projectName="Bathroom_fan" targetName="___idf_project_common" />
+      <config projectName="Bathroom_fan" targetName="Projectors.elf" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp-wolfssl" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp_gdbstub" />
+      <config projectName="Bathroom_fan" targetName="___idf_console" />
+      <config projectName="Bathroom_fan" targetName="___idf_bootloader_support" />
+      <config projectName="Bathroom_fan" targetName="___idf_coap" />
+      <config projectName="Bathroom_fan" targetName="__idf_libsodium" />
+      <config projectName="Bathroom_fan" targetName="mbedcrypto" />
+      <config projectName="Bathroom_fan" targetName="__idf_jsmn" />
+      <config projectName="Bathroom_fan" targetName="__idf_freertos" />
+      <config projectName="Bathroom_fan" targetName="___idf_mqtt" />
+      <config projectName="Bathroom_fan" targetName="__idf_malloc_logger" />
+      <config projectName="Bathroom_fan" targetName="___idf_openssl" />
+      <config projectName="Bathroom_fan" targetName="Bathroom_fan.elf" />
+      <config projectName="Bathroom_fan" targetName="___idf_spi_flash" />
+      <config projectName="Bathroom_fan" targetName="__idf_wpa_supplicant" />
+      <config projectName="Bathroom_fan" targetName="__idf_bootloader_support" />
+      <config projectName="Bathroom_fan" targetName="___idf_malloc_logger" />
+      <config projectName="Bathroom_fan" targetName="___idf_vfs" />
+      <config projectName="Bathroom_fan" targetName="size-files" />
+      <config projectName="Bathroom_fan" targetName="mconf-idf" />
+      <config projectName="Bathroom_fan" targetName="___idf_project_events" />
+      <config projectName="Bathroom_fan" targetName="__idf_http_parser" />
+      <config projectName="Bathroom_fan" targetName="__idf_mqtt" />
+      <config projectName="Bathroom_fan" targetName="__idf_project_events" />
+      <config projectName="Bathroom_fan" targetName="Motion_Detector.elf" />
+      <config projectName="Bathroom_fan" targetName="flash" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp_https_ota" />
+      <config projectName="Bathroom_fan" targetName="___idf_newlib" />
+      <config projectName="Bathroom_fan" targetName="size" />
+      <config projectName="Bathroom_fan" targetName="___idf_wpa_supplicant" />
+      <config projectName="Bathroom_fan" targetName="___idf_nvs_flash" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp_http_client" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp_http_client" />
+      <config projectName="Bathroom_fan" targetName="___idf_util" />
+      <config projectName="Bathroom_fan" targetName="__idf_main" />
+      <config projectName="Bathroom_fan" targetName="blank_ota_data" />
+      <config projectName="Bathroom_fan" targetName="__idf_coap" />
+      <config projectName="Bathroom_fan" targetName="___idf_wifi_provisioning" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp-tls" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp_common" />
+      <config projectName="Bathroom_fan" targetName="___idf_pthread" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp8266" />
+      <config projectName="Bathroom_fan" targetName="__idf_smartconfig_ack" />
+      <config projectName="Bathroom_fan" targetName="__idf_project_utils" />
+      <config projectName="Bathroom_fan" targetName="___idf_sht21" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp_ringbuf" />
+      <config projectName="Bathroom_fan" targetName="___idf_project_utils" />
+      <config projectName="Bathroom_fan" targetName="___idf_tcp_transport" />
+      <config projectName="Bathroom_fan" targetName="bootloader" />
+      <config projectName="Bathroom_fan" targetName="___idf_tcpip_adapter" />
+      <config projectName="Bathroom_fan" targetName="__idf_heap" />
+      <config projectName="Bathroom_fan" targetName="gen_project_binary" />
+      <config projectName="Bathroom_fan" targetName="erase_otadata" />
+      <config projectName="Bathroom_fan" targetName="app" />
+      <config projectName="Bathroom_fan" targetName="bootloader-flash" />
+      <config projectName="Bathroom_fan" targetName="___idf_lwip" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp-tls" />
+      <config projectName="Bathroom_fan" targetName="__idf_spi_ram" />
+      <config projectName="Bathroom_fan" targetName="___idf_spiffs" />
+      <config projectName="Bathroom_fan" targetName="_project_elf_src" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp_gdbstub" />
+      <config projectName="Bathroom_fan" targetName="__idf_vfs" />
+      <config projectName="Bathroom_fan" targetName="___idf_app_update" />
+      <config projectName="Bathroom_fan" targetName="___idf_json" />
+      <config projectName="Bathroom_fan" targetName="___idf_esptool_py" />
+      <config projectName="Bathroom_fan" targetName="__idf_sht21" />
+      <config projectName="Bathroom_fan" targetName="menuconfig" />
+      <config projectName="Bathroom_fan" targetName="app-flash" />
+      <config projectName="Bathroom_fan" targetName="__idf_console" />
+      <config projectName="Bathroom_fan" targetName="__idf_app_update" />
+      <config projectName="Bathroom_fan" targetName="mbedx509" />
+      <config projectName="Bathroom_fan" targetName="___idf_main" />
+      <config projectName="Bathroom_fan" targetName="___idf_project_ota" />
+      <config projectName="Bathroom_fan" targetName="___idf_smartconfig_ack" />
+      <config projectName="Bathroom_fan" targetName="___idf_heap" />
+      <config projectName="Bathroom_fan" targetName="__idf_lwip" />
+      <config projectName="Bathroom_fan" targetName="___idf_partition_table" />
+      <config projectName="Bathroom_fan" targetName="___idf_esp8266" />
+      <config projectName="Bathroom_fan" targetName="__idf_tcp_transport" />
+      <config projectName="Bathroom_fan" targetName="___idf_freertos" />
+      <config projectName="Bathroom_fan" targetName="___idf_bootloader" />
+      <config projectName="Bathroom_fan" targetName="size-components" />
+      <config projectName="Bathroom_fan" targetName="__idf_newlib" />
+      <config projectName="Bathroom_fan" targetName="__idf_wifi_provisioning" />
+      <config projectName="Bathroom_fan" targetName="confserver" />
+      <config projectName="Bathroom_fan" targetName="__idf_build_target" />
+      <config projectName="Bathroom_fan" targetName="__idf_project_ota" />
+      <config projectName="Bathroom_fan" targetName="___idf_spi_ram" />
+      <config projectName="Bathroom_fan" targetName="__idf_esp_common" />
+      <config projectName="Bathroom_fan" targetName="__idf_spi_flash" />
+      <config projectName="Bathroom_fan" targetName="partition_table" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_PASS_SYSTEM_ENVIRONMENT="false">
+        <ADDITIONAL_GENERATION_ENVIRONMENT>
+          <envs>
+            <env name="IDF_PATH" value="C:\Users\USER\ESP8266\ESP8266_RTOS_SDK_latest" />
+            <env name="PYTHON" value="C:\Python_2.7.17\python.exe" />
+            <env name="ESPPORT" value="COM6" />
+            <env name="PATH" value="C:\Users\USER\ESP8266\ESP8266_RTOS_SDK_latest\tools;C:\msys32\Git\cmd;C:\Users\USER\ESP8266\xtensa-lx106-elf-win32-1.22.0-100-ge567ec7-5.2.0\bin;C:\MinGW\bin" />
+          </envs>
+        </ADDITIONAL_GENERATION_ENVIRONMENT>
+      </configuration>
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="046f6644-c27d-4b68-91d0-3c03152394dc" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1XtpxupxaOoz4nVXm4DG559e9Jy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="RunManager" selected="CMake Application.flash_all">
+    <configuration default="true" type="ESP.FLASH" factoryName="ESP32 flash rom" configurationName="Debug" port="/dev/ttyS5" baud="115200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Bathroom_fan.elf" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Bathroom_fan" TARGET_NAME="Bathroom_fan.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Bathroom_fan" RUN_TARGET_NAME="Bathroom_fan.elf">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="___idf_sht21" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Bathroom_fan" TARGET_NAME="___idf_sht21" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="__idf_sht21" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Bathroom_fan" TARGET_NAME="__idf_sht21" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="flash_all" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="false" PROJECT_NAME="Bathroom_fan" TARGET_NAME="flash" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="erase flash" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Python_2.7.17\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/ESP8266/ESP8266_RTOS_SDK_latest/components/esptool_py/esptool" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="false" />
+      <option name="ADD_SOURCE_ROOTS" value="false" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="esptool.py" />
+      <option name="PARAMETERS" value="--chip esp8266 --port COM6 erase_flash" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.flash_all" />
+      <item itemvalue="CMake Application.___idf_sht21" />
+      <item itemvalue="CMake Application.Bathroom_fan.elf" />
+      <item itemvalue="CMake Application.__idf_sht21" />
+      <item itemvalue="Python.erase flash" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="046f6644-c27d-4b68-91d0-3c03152394dc" name="Default Changelist" comment="" />
+      <created>1581875494582</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581875494582</updated>
+      <workItem from="1581875496046" duration="58000" />
+      <workItem from="1581875617635" duration="2102000" />
+      <workItem from="1581877758619" duration="564000" />
+      <workItem from="1581878450894" duration="1781000" />
+      <workItem from="1581880598992" duration="2704000" />
+      <workItem from="1581891861845" duration="160000" />
+      <workItem from="1581892091017" duration="1767000" />
+      <workItem from="1581902142034" duration="630000" />
+      <workItem from="1581966905265" duration="228000" />
+      <workItem from="1581967159154" duration="11075000" />
+      <workItem from="1581980009517" duration="67000" />
+      <workItem from="1581981969756" duration="98000" />
+      <workItem from="1581982071586" duration="3313000" />
+      <workItem from="1581985389972" duration="40000" />
+      <workItem from="1581988304452" duration="1640000" />
+      <workItem from="1582051551927" duration="10017000" />
+      <workItem from="1582063782037" duration="5677000" />
+      <workItem from="1582070725422" duration="4438000" />
+      <workItem from="1582119021494" duration="1797000" />
+      <workItem from="1582129888137" duration="2052000" />
+      <workItem from="1582157901420" duration="3730000" />
+      <workItem from="1582163194114" duration="11000" />
+      <workItem from="1582163219156" duration="1372000" />
+      <workItem from="1582228701120" duration="3414000" />
+      <workItem from="1582253663142" duration="6923000" />
+      <workItem from="1582323332023" duration="12974000" />
+      <workItem from="1582386860308" duration="37454000" />
+      <workItem from="1582485468809" duration="2165000" />
+      <workItem from="1582489212607" duration="12578000" />
+      <workItem from="1582512637905" duration="21851000" />
+      <workItem from="1582786984060" duration="3552000" />
+      <workItem from="1582842000774" duration="3498000" />
+      <workItem from="1588540556561" duration="2216000" />
+      <workItem from="1588542777273" duration="3930000" />
+      <workItem from="1588546875142" duration="429000" />
+      <workItem from="1588625226922" duration="7002000" />
+      <workItem from="1589846904594" duration="1198000" />
+      <workItem from="1590011209118" duration="6517000" />
+      <workItem from="1590024371672" duration="1926000" />
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="182" key="#Inspections" timestamp="1581878501363">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="182" key="#Inspections/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1581878501363" />
+    <state x="414" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588546218454">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1588546218454" />
+    <state x="686" y="247" key="#flash_all" timestamp="1590017571461">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="686" y="247" key="#flash_all/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1590017571461" />
+    <state x="297" y="325" width="1104" height="468" key="EnvironmentVariablesDialog" timestamp="1582489403012">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="297" y="325" width="1104" height="468" key="EnvironmentVariablesDialog/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582489403012" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1582845503299">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582845503299" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1582845503299">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582845503299" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1582845503298">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582845503298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1582845503299">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582845503299" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1582261876967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582261876967" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1582261876967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582261876967" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1582261876967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582261876967" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1582261876967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582261876967" />
+    <state x="463" y="166" key="SettingsEditor" timestamp="1588546268877">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="166" key="SettingsEditor/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1588546268877" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1582056104696">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1582056104696" />
+  </component>
+</project>
