@@ -19,11 +19,11 @@
 #define I2C_MASTER_SDA_IO                    GPIO_NUM_12 // gpio number for I2C master data, D6
 #define I2C_MASTER_SCL_IO                    GPIO_NUM_13 // gpio number for I2C master clock, D4
 #else
-#define AP_CONNECTION_STATUS_LED_PIN         GPIO_NUM_5
-#define SERVER_AVAILABILITY_STATUS_LED_PIN   GPIO_NUM_4
-#define RELAY_PIN                            GPIO_NUM_2
-#define SWITCHER_INPUT_PIN                   GPIO_NUM_2
-#define I2C_MASTER_SDA_IO                    GPIO_NUM_12
+#define AP_CONNECTION_STATUS_LED_PIN         GPIO_NUM_13
+#define SERVER_AVAILABILITY_STATUS_LED_PIN   GPIO_NUM_14
+#define RELAY_PIN                            GPIO_NUM_12
+#define SWITCHER_INPUT_PIN                   GPIO_NUM_4
+#define I2C_MASTER_SDA_IO                    GPIO_NUM_0
 #define I2C_MASTER_SCL_IO                    GPIO_NUM_2
 #endif
 
@@ -84,5 +84,6 @@ static void stop_both_leds_blinking();
 static void start_both_leds_blinking(unsigned int ms);
 static void i2c_master_init();
 static void i2c_master_deinit();
+static char* create_request();
 
 #endif

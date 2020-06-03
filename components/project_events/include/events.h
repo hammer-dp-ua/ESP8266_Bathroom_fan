@@ -11,14 +11,13 @@
 #define STATUS_INFO_IS_BEING_SENT_FLAG          (1 << 3)
 #define WIFI_CONNECTED_FLAG                     (1 << 4)
 #define ACCESS_POINT_IS_BEING_SCANNED_FLAG      (1 << 5)
-#define PIN_INTERRUPT_WAS_INITIALIZED_FLAG      (1 << 6)
-#define ESP_EVENT_LOOP_INITIALIZED_FLAG         (1 << 7)
-#define TURNED_ON_BY_SWITCHER_FLAG              (1 << 8)
-#define TURNED_ON_BY_SERVER_FLAG                (1 << 9)
+#define ESP_EVENT_LOOP_INITIALIZED_FLAG         (1 << 6)
+#define TURNED_ON_BY_SWITCHER_FLAG              (1 << 7)
+#define TURNED_ON_BY_SERVER_FLAG                (1 << 8)
 
-#define SEND_STATUS_INFO_EVENT                  (1 << 12)
-#define SCAN_ACCESS_POINT_EVENT                 (1 << 13)
-#define SWITCHER_EVENT                          (1 << 14)
+#define SEND_STATUS_INFO_EVENT                  (1 << 9)
+#define SCAN_ACCESS_POINT_EVENT                 (1 << 10)
+#define SWITCHER_EVENT                          (1 << 11)
 
 void init_events();
 void save_being_updated_event();

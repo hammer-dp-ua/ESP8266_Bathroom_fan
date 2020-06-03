@@ -1,7 +1,7 @@
 #ifndef DEVICE_SETTINGS
 #define DEVICE_SETTINGS
 
-#define TESTING
+//#define TESTING
 
 // const are saved at 40200000h (flash memory)
 static const char DEVICE_NAME[] = "Bathroom fan";

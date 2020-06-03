@@ -3,6 +3,11 @@
  * GPIO15 to GND
  * GPIO0 to "+" or to "GND" for flashing
  * EN to "+"
+ *
+ * GPIO2 to "+". It's on-board LED
+ * GPIO16 to "+"
+ *
+ * TxD - GPIO1, RxD - GPIO3
  */
 
 #include "main.h"
@@ -14,7 +19,7 @@ static unsigned short errors_counter_g = 0;
 static unsigned char repetitive_request_errors_counter_g = 0;
 static unsigned char repetitive_ap_connecting_errors_counter_g = 0;
 static unsigned int repetitive_tcp_server_errors_counter_g = 0;
-static unsigned char manually_turned_on_fan_working_time_minutes_g = 10;
+static unsigned int manually_turned_on_fan_working_time_minutes_g = 10;
 
 static esp_timer_handle_t milliseconds_timer_g = NULL;
 static esp_timer_handle_t errors_checker_timer_g = NULL;
@@ -24,6 +29,7 @@ static esp_timer_handle_t ap_scanning_timer_g = NULL;
 static esp_timer_handle_t anti_contact_bounce_timer_g = NULL;
 static esp_timer_handle_t fan_turn_off_timer_manual_switch_g = NULL;
 static esp_timer_handle_t fan_turn_off_timer_server_down_g = NULL;
+static esp_timer_handle_t testing_timer_g = NULL;
 
 static SemaphoreHandle_t wirelessNetworkActionsSemaphore_g = NULL;
 static xQueueHandle network_events_queue_g = NULL;
@@ -167,6 +173,83 @@ static void send_status_info_task() {
    xSemaphoreTake(wirelessNetworkActionsSemaphore_g, portMAX_DELAY);
    blink_on_send(SERVER_AVAILABILITY_STATUS_LED_PIN);
 
+   char *request = create_request();
+
+   #ifdef ALLOW_USE_PRINTF
+   printf("\nCreated Info Request: %s\nTime: %u\n", request, hundred_milliseconds_counter_g);
+   #endif
+
+   char *response = send_request(request, 512, &hundred_milliseconds_counter_g);
+
+   FREE(request);
+
+   if (response == NULL) {
+      on_response_error();
+   } else {
+      if (strstr(response, RESPONSE_SERVER_SENT_OK)) {
+         on_response_ok();
+
+         if (!is_first_status_info_sent()) {
+            save_first_status_info_sent_event();
+
+            unsigned int overwrite_value = 0xFFFF;
+            rtc_mem_write(SYSTEM_RESTART_REASON_TYPE_RTC_ADDRESS, &overwrite_value, 4);
+         }
+
+         #ifdef ALLOW_USE_PRINTF
+         printf("Status Info Response OK. Time: %u\n", hundred_milliseconds_counter_g);
+         #endif
+
+         if (strstr(response, UPDATE_FIRMWARE)) {
+            save_being_updated_event();
+
+            SYSTEM_RESTART_REASON_TYPE reason = SOFTWARE_UPGRADE;
+            rtc_mem_write(SYSTEM_RESTART_REASON_TYPE_RTC_ADDRESS, &reason, 4);
+
+            update_firmware(AP_CONNECTION_STATUS_LED_PIN, SERVER_AVAILABILITY_STATUS_LED_PIN);
+         }
+
+         bool is_numeric_param;
+         char *manually_turned_on_timeout_setting = get_gson_element_value(response, "manuallyTurnedOnTimeoutSetting",
+               &is_numeric_param, hundred_milliseconds_counter_g);
+
+         if (manually_turned_on_timeout_setting != NULL) {
+            if (is_numeric_param) {
+               int manually_turned_on_timeout_setting_numeric = atoi(manually_turned_on_timeout_setting);
+               if (manually_turned_on_timeout_setting_numeric > 0) {
+                  manually_turned_on_fan_working_time_minutes_g = manually_turned_on_timeout_setting_numeric;
+               }
+            }
+            FREE(manually_turned_on_timeout_setting);
+         }
+
+         if (strstr(response, TURN_ON)) {
+            save_turned_on_by_server_event();
+            gpio_set_level(RELAY_PIN, 1);
+         } else {
+            clear_turned_on_by_server_event();
+            // Don't turn off if turned on by switcher
+            if (!is_turned_on_by_switcher()) {
+               gpio_set_level(RELAY_PIN, 0);
+            }
+         }
+      } else {
+         on_response_error();
+      }
+
+      FREE(response);
+   }
+
+   #ifdef ALLOW_USE_PRINTF
+   printf("send_status_info_task to be deleted. Time: %u\n", hundred_milliseconds_counter_g);
+   #endif
+
+   clear_sending_status_info_event();
+   xSemaphoreGive(wirelessNetworkActionsSemaphore_g);
+   vTaskDelete(NULL);
+}
+
+static char* create_request() {
    char signal_strength[5];
    snprintf(signal_strength, 5, "%d", signal_strength_g);
    char errors_counter[6];
@@ -178,16 +261,18 @@ static void send_status_info_task() {
    snprintf(free_heap_space, 7, "%u", esp_get_free_heap_size());
    char *reset_reason = "";
    char *system_restart_reason = "";
-   char *switchedOnManually = is_turned_on_by_switcher() ? "true" : "false";
+   char *switched_on_manually = is_turned_on_by_switcher() ? "true" : "false";
 
    char switched_on_manually_seconds_left_param[6];
    unsigned int switched_on_manually_seconds_left = 0;
    if (is_turned_on_by_switcher() && !is_turned_on_by_server() &&
-         hundred_milliseconds_manually_switched_on_fan_time_g > 0 &&
-         hundred_milliseconds_counter_g > hundred_milliseconds_manually_switched_on_fan_time_g) {
+       hundred_milliseconds_manually_switched_on_fan_time_g > 0 &&
+       hundred_milliseconds_counter_g > hundred_milliseconds_manually_switched_on_fan_time_g) {
       unsigned int seconds_passed =
             (hundred_milliseconds_counter_g - hundred_milliseconds_manually_switched_on_fan_time_g) / 10;
-      switched_on_manually_seconds_left = manually_turned_on_fan_working_time_minutes_g * 60 - seconds_passed;
+      unsigned int manually_turned_on_fan_working_time_seconds = manually_turned_on_fan_working_time_minutes_g * 60;
+
+      switched_on_manually_seconds_left = manually_turned_on_fan_working_time_seconds - seconds_passed;
    }
    snprintf(switched_on_manually_seconds_left_param, 6, "%u", switched_on_manually_seconds_left);
 
@@ -283,7 +368,7 @@ static void send_status_info_task() {
 
    const char *request_payload_template_parameters[] =
          {signal_strength, DEVICE_NAME, errors_counter, uptime, build_timestamp, free_heap_space, reset_reason,
-          system_restart_reason, temperature_param, temperature_raw_param, humidity_param, switchedOnManually, switched_on_manually_seconds_left_param, NULL};
+          system_restart_reason, temperature_param, temperature_raw_param, humidity_param, switched_on_manually, switched_on_manually_seconds_left_param, NULL};
    char *request_payload = set_string_parameters(STATUS_INFO_REQUEST_PAYLOAD_TEMPLATE, request_payload_template_parameters);
 
    unsigned short request_payload_length = strnlen(request_payload, 0xFFFF);
@@ -292,79 +377,7 @@ static void send_status_info_task() {
    const char *request_template_parameters[] = {request_payload_length_string, SERVER_IP_ADDRESS, request_payload, NULL};
    char *request = set_string_parameters(STATUS_INFO_POST_REQUEST, request_template_parameters);
    FREE(request_payload);
-
-   #ifdef ALLOW_USE_PRINTF
-   printf("\nCreated Info Request: %s\nTime: %u\n", request, hundred_milliseconds_counter_g);
-   #endif
-
-   char *response = send_request(request, 512, &hundred_milliseconds_counter_g);
-
-   FREE(request);
-
-   if (response == NULL) {
-      on_response_error();
-   } else {
-      if (strstr(response, RESPONSE_SERVER_SENT_OK)) {
-         on_response_ok();
-
-         if (!is_first_status_info_sent()) {
-            save_first_status_info_sent_event();
-
-            unsigned int overwrite_value = 0xFFFF;
-            rtc_mem_write(SYSTEM_RESTART_REASON_TYPE_RTC_ADDRESS, &overwrite_value, 4);
-         }
-
-         #ifdef ALLOW_USE_PRINTF
-         printf("Status Info Response OK. Time: %u\n", hundred_milliseconds_counter_g);
-         #endif
-
-         if (strstr(response, UPDATE_FIRMWARE)) {
-            save_being_updated_event();
-
-            SYSTEM_RESTART_REASON_TYPE reason = SOFTWARE_UPGRADE;
-            rtc_mem_write(SYSTEM_RESTART_REASON_TYPE_RTC_ADDRESS, &reason, 4);
-
-            update_firmware(AP_CONNECTION_STATUS_LED_PIN, SERVER_AVAILABILITY_STATUS_LED_PIN);
-         }
-
-         bool is_numeric_param;
-         char *manually_turned_on_timeout_setting = get_gson_element_value(response, "manuallyTurnedOnTimeoutSetting",
-               &is_numeric_param, hundred_milliseconds_counter_g);
-
-         if (manually_turned_on_timeout_setting != NULL) {
-            if (is_numeric_param) {
-               int manually_turned_on_timeout_setting_numeric = atoi(manually_turned_on_timeout_setting);
-               if (manually_turned_on_timeout_setting_numeric > 0) {
-                  manually_turned_on_fan_working_time_minutes_g = manually_turned_on_timeout_setting_numeric;
-               }
-            }
-            FREE(manually_turned_on_timeout_setting);
-         }
-
-         if (strstr(response, TURN_ON)) {
-            save_turned_on_by_server_event();
-            gpio_set_level(RELAY_PIN, 1);
-         } else {
-            clear_turned_on_by_server_event();
-            // Don't turn off if turned on by switcher
-            if (!is_turned_on_by_switcher()) {
-               gpio_set_level(RELAY_PIN, 0);
-            }
-         }
-      } else {
-         on_response_error();
-      }
-
-      FREE(response);
-   }
-
-   #ifdef ALLOW_USE_PRINTF
-   printf("send_status_info_task to be deleted. Time: %u\n", hundred_milliseconds_counter_g);
-   #endif
-
-   clear_sending_status_info_event();
-   xSemaphoreGive(wirelessNetworkActionsSemaphore_g);
-   vTaskDelete(NULL);
+   return request;
 }
 
 static void send_sending_status_info_event_cb() {
@@ -410,14 +423,13 @@ static void resume_pins_interrupts_cb() {
 }
 
 static void gpio_isr_handler(void *arg) {
-   if (was_pin_interrupt_initialized()) {
-      ESP_ERROR_CHECK(gpio_set_intr_type(SWITCHER_INPUT_PIN, GPIO_INTR_DISABLE))
-      ESP_ERROR_CHECK(esp_timer_start_once(anti_contact_bounce_timer_g, 5 * 1000 * 1000)) // resume interrupts after 5s
+   ESP_ERROR_CHECK(gpio_set_intr_type(SWITCHER_INPUT_PIN, GPIO_INTR_DISABLE))
+   ESP_ERROR_CHECK(esp_timer_start_once(anti_contact_bounce_timer_g, 1 * 1000 * 1000)) // resume interrupts after 1s
 
+   // After 10s
+   if (hundred_milliseconds_counter_g > 100) {
       unsigned int event = SWITCHER_EVENT;
       xQueueSendToBackFromISR(network_events_queue_g, &event, NULL);
-   } else {
-      save_pin_interrupt_was_initialized_event();
    }
 }
 
@@ -522,10 +534,9 @@ static void schedule_access_point_scanning(unsigned int timeout_ms) {
 static void manually_fan_turned_on_timeout_cb() {
    clear_turned_on_by_switcher_event();
 
-   if (!is_turned_on_by_server() || is_server_down()) {
-      gpio_set_level(RELAY_PIN, 0);
-   }
+   gpio_set_level(RELAY_PIN, 0);
    hundred_milliseconds_manually_switched_on_fan_time_g = 0;
+   send_sending_status_info_event_cb();
 }
 
 static void schedule_fan_turning_off(esp_timer_handle_t timer, void (*callback)()) {
@@ -539,7 +550,7 @@ static void schedule_fan_turning_off(esp_timer_handle_t timer, void (*callback)(
    };
 
    ESP_ERROR_CHECK(esp_timer_create(&timer_config, &timer))
-   unsigned long timeout_us = ((unsigned long) manually_turned_on_fan_working_time_minutes_g) * 60L * 1000L * 1000L;
+   unsigned long timeout_us = manually_turned_on_fan_working_time_minutes_g * 60L * 1000L * 1000L;
    ESP_ERROR_CHECK(esp_timer_start_once(timer, timeout_us))
 }
 
@@ -573,9 +584,11 @@ static void event_processing_task() {
                } else {
                   gpio_set_level(RELAY_PIN, 1);
                   save_turned_on_by_switcher_event();
-                  schedule_fan_turning_off(fan_turn_off_timer_manual_switch_g, manually_fan_turned_on_timeout_cb);
                   hundred_milliseconds_manually_switched_on_fan_time_g = hundred_milliseconds_counter_g;
+                  schedule_fan_turning_off(fan_turn_off_timer_manual_switch_g, manually_fan_turned_on_timeout_cb);
                }
+
+               send_sending_status_info_event_cb();
             }
          } else if (event == SCAN_ACCESS_POINT_EVENT) {
             if (is_access_point_is_being_scanned()) {
@@ -611,10 +624,32 @@ static void i2c_master_deinit() {
    gpio_config(&output_pins);
 }
 
+static void testing_cb() {
+   gpio_set_level(RELAY_PIN, 1);
+}
+
+static void schedule_testing(esp_timer_handle_t timer, void (*callback)()) {
+   if (timer != NULL) {
+      ESP_ERROR_CHECK(esp_timer_stop(timer))
+      ESP_ERROR_CHECK(esp_timer_delete(timer))
+   }
+
+   esp_timer_create_args_t timer_config = {
+         .callback = callback
+   };
+
+   ESP_ERROR_CHECK(esp_timer_create(&timer_config, &timer))
+   unsigned long timeout_us = 30L * 1000L * 1000L;
+   ESP_ERROR_CHECK(esp_timer_start_once(timer, timeout_us))
+}
+
 void app_main(void) {
+   //schedule_testing(testing_timer_g, testing_cb);
+
    start_100_milliseconds_counter();
 
    pins_config();
+   pins_isr_config();
 
    init_events();
    init_utils(&hundred_milliseconds_counter_g);
@@ -631,9 +666,6 @@ void app_main(void) {
    printf("\nRunning partition type: label: %s, %d, subtype: %d, offset: 0x%X, size: 0x%X, build timestamp: %s\n",
          running->label, running->type, running->subtype, running->address, running->size, __TIMESTAMP__);
    #endif
-
-   vTaskDelay(1000 / portTICK_PERIOD_MS);
-   pins_isr_config();
 
    wirelessNetworkActionsSemaphore_g = xSemaphoreCreateBinary();
    xSemaphoreGive(wirelessNetworkActionsSemaphore_g);

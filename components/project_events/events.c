@@ -72,14 +72,6 @@ bool is_access_point_is_being_scanned() {
    return xEventGroupGetBits(flags_g) & ACCESS_POINT_IS_BEING_SCANNED_FLAG;
 }
 
-void save_pin_interrupt_was_initialized_event() {
-   xEventGroupSetBits(flags_g, PIN_INTERRUPT_WAS_INITIALIZED_FLAG);
-}
-
-bool was_pin_interrupt_initialized() {
-   return xEventGroupGetBits(flags_g) & PIN_INTERRUPT_WAS_INITIALIZED_FLAG;
-}
-
 void save_esp_event_loop_initialized_event() {
    xEventGroupSetBits(flags_g, ESP_EVENT_LOOP_INITIALIZED_FLAG);
 }
