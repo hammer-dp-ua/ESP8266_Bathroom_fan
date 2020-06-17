@@ -14,10 +14,11 @@
 #define ESP_EVENT_LOOP_INITIALIZED_FLAG         (1 << 6)
 #define TURNED_ON_BY_SWITCHER_FLAG              (1 << 7)
 #define TURNED_ON_BY_SERVER_FLAG                (1 << 8)
+#define PINS_INTERRUPT_DISABLED_FLAG            (1 << 9)
 
-#define SEND_STATUS_INFO_EVENT                  (1 << 9)
-#define SCAN_ACCESS_POINT_EVENT                 (1 << 10)
-#define SWITCHER_EVENT                          (1 << 11)
+#define SEND_STATUS_INFO_EVENT                  (1 << 10)
+#define SCAN_ACCESS_POINT_EVENT                 (1 << 11)
+#define SWITCHER_EVENT                          (1 << 12)
 
 void init_events();
 void save_being_updated_event();
@@ -44,5 +45,8 @@ bool is_turned_on_by_switcher();
 void save_turned_on_by_server_event();
 void clear_turned_on_by_server_event();
 bool is_turned_on_by_server();
+void save_pins_interrupt_disabled_event();
+bool is_pins_interrupt_disabled();
+void clear_pins_interrupt_disabled();
 
 #endif

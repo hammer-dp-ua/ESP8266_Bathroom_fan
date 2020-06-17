@@ -1,6 +1,6 @@
 #include "events.h"
 
-static EventGroupHandle_t flags_g = NULL;
+static volatile EventGroupHandle_t flags_g = NULL;
 
 void init_events() {
    if (flags_g == NULL) {
@@ -102,4 +102,16 @@ void clear_turned_on_by_server_event() {
 
 bool is_turned_on_by_server() {
    return xEventGroupGetBits(flags_g) & TURNED_ON_BY_SERVER_FLAG;
+}
+
+void save_pins_interrupt_disabled_event() {
+   xEventGroupSetBits(flags_g, PINS_INTERRUPT_DISABLED_FLAG);
+}
+
+bool is_pins_interrupt_disabled() {
+   return xEventGroupGetBits(flags_g) & PINS_INTERRUPT_DISABLED_FLAG;
+}
+
+void clear_pins_interrupt_disabled() {
+   xEventGroupClearBits(flags_g, PINS_INTERRUPT_DISABLED_FLAG);
 }

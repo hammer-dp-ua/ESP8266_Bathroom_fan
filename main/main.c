@@ -416,6 +416,7 @@ static void pins_config() {
 
 static void resume_pins_interrupts_cb() {
    ESP_ERROR_CHECK(gpio_set_intr_type(SWITCHER_INPUT_PIN, GPIO_INTR_ANYEDGE))
+   clear_pins_interrupt_disabled();
 
    #ifdef ALLOW_USE_PRINTF
    printf("\nPins interrupts resumed. Time: %u\n", hundred_milliseconds_counter_g);
@@ -423,14 +424,16 @@ static void resume_pins_interrupts_cb() {
 }
 
 static void gpio_isr_handler(void *arg) {
-   ESP_ERROR_CHECK(gpio_set_intr_type(SWITCHER_INPUT_PIN, GPIO_INTR_DISABLE))
-   ESP_ERROR_CHECK(esp_timer_start_once(anti_contact_bounce_timer_g, 1 * 1000 * 1000)) // resume interrupts after 1s
-
    // After 10s
-   if (hundred_milliseconds_counter_g > 100) {
+   if (!is_pins_interrupt_disabled() && hundred_milliseconds_counter_g > 100) {
       unsigned int event = SWITCHER_EVENT;
       xQueueSendToBackFromISR(network_events_queue_g, &event, NULL);
    }
+
+   // For some reason a second interrupt could be fired immediately and GPIO_INTR_DISABLE doesn't prevent it
+   save_pins_interrupt_disabled_event();
+   ESP_ERROR_CHECK(gpio_set_intr_type(SWITCHER_INPUT_PIN, GPIO_INTR_DISABLE))
+   ESP_ERROR_CHECK(esp_timer_start_once(anti_contact_bounce_timer_g, 1 * 1000 * 1000)) // resume interrupts after 1s
 }
 
 static void pins_isr_config() {
@@ -571,6 +574,11 @@ static void event_processing_task() {
             save_sending_status_info_event();
             xTaskCreate(send_status_info_task, SEND_STATUS_INFO_TASK_NAME, configMINIMAL_STACK_SIZE * 3, NULL, 1, NULL);
          } else if (event == SWITCHER_EVENT) {
+            #ifdef ALLOW_USE_PRINTF
+            printf("SWITCHER_EVENT: is_turned_on_by_server=%u; is_turned_on_by_switcher=%u. Time: %u\n",
+                  is_turned_on_by_server(), is_turned_on_by_switcher(), hundred_milliseconds_counter_g);
+            #endif
+
             if (!is_turned_on_by_server()) {
                if (is_turned_on_by_switcher()) {
                   gpio_set_level(RELAY_PIN, 0);
